@@ -1,0 +1,61 @@
+<apex:page docType="html-5.0" controller="Cust" >
+    <apex:sectionHeader title="Csv to table values"/>
+    <apex:form>
+        <apex:pageBlock>
+        
+                <apex:pageBlockButtons location="bottom">
+                    <apex:commandButton value="import data" action="{!import_csv}"/>
+                </apex:pageBlockButtons>
+                <apex:inputFile value="{!csv}"></apex:inputFile>
+                <apex:pageBlockTable value="{!uploadAccount}" var="person">
+                    <apex:column >
+                        <apex:facet name="header">Name</apex:facet>
+                        {!person.name}
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Age</apex:facet>
+                        {!person.age}
+                    </apex:column>
+                </apex:pageBlockTable>
+            
+        </apex:pageBlock>
+    </apex:form>
+    
+    
+</apex:page>
+
+
+
+public class Cust {
+    public class person{
+        public string name{get;set;}
+        public string age{get;set;}
+    }
+    public Blob csv{get;set;}
+    public List<person>persons{get;set;}
+    public void import_csv()
+    {
+        string csv_str=csv.toString();
+        string[] csv_lines=csv_str.split('\n');
+        persons = new list<person>();
+        for(Integer i=0;i<csv_lines.size();i++){
+            person p=new person();
+            string[] csv_col=csv_lines[i].split(',');
+            Date today=Date.today();
+            Date bd=Date.parse(csv_col[1]);
+            p.age=String.valueOf(today.year()-bd.year());
+            p.name=csv_col[0];
+            persons.add(p);
+        }
+    }
+    
+    public List<person>getuploadAccount(){
+        if(persons!=null){
+            if(persons.size()>0){
+                return persons;
+            }
+            else return null;
+        }
+        else return null;
+    }
+}
