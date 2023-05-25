@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Relationships</title>
+</head>
+<body>
+  <div id="parent">
+    <h1>Parent Node</h1>
+    <p>Child Node 1</p>
+    <p>Child Node 2</p>
+    <p>Child Node 3</p>
+  </div>
+  <script>
+    var parent = document.getElementById("parent");
+    var firstChild = parent.firstElementChild;
+    var secondChild = firstChild.nextElementSibling;
+    var thirdChild = secondChild.nextElementSibling;
+
+    console.log("Parent Node:", parent);
+    console.log("First Child Node:", firstChild);
+    console.log("Second Child Node:", secondChild);
+    console.log("Third Child Node:", thirdChild);
+  </script>
+</body>
+</html>
