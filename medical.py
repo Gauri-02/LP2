@@ -1,34 +1,31 @@
-
-
 def rule1(symptons):
-    if 'fever' in symptons and 'cough' in symptons and 'fatigue' in symptons:
-        return 'You may have flu'
-    return None
+    if "fever" in symptons and "cough" in symptons and "headache" in symptons:
+        return "You have flu"
 
 def rule2(symptons):
-    if 'headache' in symptons and 'dizziness' in symptons :
-        return 'You might have low iron content'
-    return None
-
-
-def get_diagonsis(symptons):
+    if "dizziness" in symptons and "nausea" in symptons and "weakness" in symptons:
+        return "you may have low iron content"
+    
+def getDia(symptons):
     rules=[rule1,rule2]
     results=[]
     for rule in rules:
         result=rule(symptons)
-        if result :
+        if result:
             results.append(result)
-    if len(results) ==0 :
-        return 'Sorry very limited data for diagonsis'
-    else :return results
-    
+    if len(results)==0:
+        return "sorry we couldnt dia"
+    else: return results
     
 
+
+
+
 def diagonsis():
-    input_sym=input("symptons : ")
-    symptons=input_sym.lower().split(" ")
-    print("hjdsj")
-    result=get_diagonsis(symptons)
+    symp=input("Symptons: ")
+    symptons=symp.lower().split(" ")
+    result=getDia(symptons)
     print(result)
+   
 
 diagonsis()

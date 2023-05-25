@@ -7,9 +7,9 @@ void prims(vector<vector<int> >adj,int n){
     visited[0]=true;
     int edge,x,y;
     edge=0;
-    cout<<"in prims"<<endl;
+    //cout<<"in prims"<<endl;
     while(edge < n-1){
-        cout<<"in while "<<endl;
+        //cout<<"in while "<<endl;
         x=0;
         y=0;
         int mini=INT_MAX;

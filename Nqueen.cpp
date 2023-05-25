@@ -47,4 +47,3 @@ int main(){
 
 }
 
-/Users/gaurivijaykar/Desktop/practical exam/LP2/N
