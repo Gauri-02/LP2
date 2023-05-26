@@ -1,0 +1,33 @@
+public class Calc {
+
+   public Integer fno{get;set;}
+   public Integer sno{get;set;}
+   public Integer res{get;set;}
+    
+    public void Add(){
+        res=fno+sno;
+    }
+    public void Sub(){
+        res=fno-sno;
+    }
+    
+    
+}
+
+
+<apex:page controller="Calc" >
+    <apex:sectionHeader title="Calculator"/>
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="+" action="{!Add}" />
+                <apex:commandButton value="Sub" action="{!Sub}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection >
+                <apex:inputText label="First no" html-placeholder="First no" value="{!fno}" />
+				<apex:inputText label="Second no" html-placeholder="Second no" value="{!sno}"/>
+                <apex:outputText label="Res" html-placeholder="result" value="{!res}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

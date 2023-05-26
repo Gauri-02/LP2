@@ -1,0 +1,57 @@
+<apex:page controller="Conv" >
+    <apex:sectionHeader title="Currency Converter"/>
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Convert" action="{!conver}" />
+			</apex:pageBlockButtons>
+        
+        <apex:inputText label="Amount" html-placeholder="amount" value="{!amount}"/>
+        <apex:pageBlockSection >
+            <apex:pageBlockSectionItem >
+            <apex:selectList label="From" value="{!fromC}"> 
+                <apex:selectOption itemLabel="USD" itemValue="USD"></apex:selectOption>
+                <apex:selectOption itemLabel="JPY" itemValue="JPY"> </apex:selectOption>
+                <apex:selectOption itemLabel="INR" itemValue="INR"></apex:selectOption>
+            </apex:selectList>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+            <apex:selectList label="To" value="{!toC}">
+                <apex:selectOption itemLabel="USD" itemValue="USD"></apex:selectOption>
+                <apex:selectOption itemLabel="JPY" itemValue="JPY"></apex:selectOption>
+                <apex:selectOption itemLabel="INR" itemValue="INR"></apex:selectOption>
+            </apex:selectList>
+        </apex:pageBlockSectionItem>
+            <apex:outputText label="converted amount" html-placeholder="Result:" value="{!result}"></apex:outputText>
+        </apex:pageBlockSection>
+        
+        
+       </apex:pageBlock>
+    </apex:form>
+</apex:page>
+
+
+
+public class currency_con {
+
+    public Decimal amount {get;set;}
+    public String fromC {get;set;}
+    public String toC {get;set;}
+    public Decimal res {get;set;}
+    public void calc(){
+        Decimal from_rate=0;
+        if(fromC=='JPY')from_rate=0.0072;
+        if(fromC=='USD')from_rate=1;
+        if(fromC=='GBP')from_rate=1.24;
+        if(fromC=='INR')from_rate=0.012;
+        Decimal first=from_rate*amount;
+        Decimal to_rate=0;
+        if(toC=='JPY')to_rate=138.59;
+        if(toC=='USD')to_rate=1;
+        if(toC=='GBP')to_rate=0.81;
+        if(toC=='INR')to_rate=82.90;
+        res=first*to_rate;
+        res=res.setScale(2, System.roundingMode.HALF_UP);
+    }
+
+}
