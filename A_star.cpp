@@ -20,7 +20,7 @@ class Eight_Puzzle {
 	vector<vector<int>> end;
 	priority_queue<state*, vector<state*>, compare> pq;
 
-	int calcCost(vector<vector<int>> c) {
+	int calcCost(vector<vector<int> > c) {
 		int cost = 0;
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
@@ -32,17 +32,17 @@ class Eight_Puzzle {
 		return cost;
 	}
 
-	pair<int,int> getBlankTile(vector<vector<int>> c) {
+	pair<int,int> getBlankTile(vector<vector<int> > c) {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				if (c[i][j] == 0) {
-					return {i,j};
+					std::make_pair (i,j);
 				}
 			}
 		}
 	}
 
-	state* makeState(vector<vector<int>> c, int gn, state* parent) {
+	state* makeState(vector<vector<int> > c, int gn, state* parent) {
 		state* s = new state;
 		s->matrix = c;
 		s->gn = gn;
@@ -56,13 +56,13 @@ class Eight_Puzzle {
 	}
 
 	void makeMove(int x, int y, int nx, int ny, state* s) {
-		vector<vector<int>> mat(s->matrix);
+		vector<vector<int> > mat(s->matrix);
 		swap(mat[x][y], mat[nx][ny]);
 		state* newState = makeState(mat, s->gn + 1, s);
 		pq.push(newState);
 	}
 
-	void printMatrix(vector<vector<int>> a) {
+	void printMatrix(vector<vector<int> > a) {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				cout << a[i][j] << " ";
@@ -71,7 +71,7 @@ class Eight_Puzzle {
 		}
 	}
 public:
-	Eight_Puzzle(vector<vector<int>> i, vector<vector<int>> e) {
+	Eight_Puzzle(vector<vector<int> > i, vector<vector<int> > e) {
 		initial = i;
 		end = e;
 		state* startstate = makeState(i, 0, NULL);
@@ -79,8 +79,8 @@ public:
 	}
 
 	void solve() {
-		vector<int> rows = {0, 1, 0, -1};
-		vector<int> cols = {1, 0, -1, 0};
+		vector<int> rows{0, 1, 0, -1};
+		vector<int> cols{1, 0, -1, 0};
 		while (calcCost(pq.top()->matrix) != 0) {
 			state* current = pq.top();
 			pq.pop();
@@ -109,7 +109,7 @@ public:
 	}
 };
 
-bool isSolvable(vector<vector<int>> initial, vector<vector<int>> end) {
+bool isSolvable(vector<vector<int> > initial, vector<vector<int> > end) {
 	vector<int> ini;
 	vector<int> en;
 	int ini_inversion_count = 0;
@@ -142,8 +142,8 @@ bool isSolvable(vector<vector<int>> initial, vector<vector<int>> end) {
 }
 
 int main() {
-	vector<vector<int>> initial(3, vector<int>(3));
-	vector<vector<int>> end(3, vector<int>(3));
+	vector<vector<int> > initial(3, vector<int>(3));
+	vector<vector<int> > end(3, vector<int>(3));
 	cout << "Enter the initial 8 puzzle configuration: " << endl;
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
